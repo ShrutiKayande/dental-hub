@@ -1,0 +1,208 @@
+{% extends "base.html" %}
+
+{% block title %}Book Appointment{% endblock %}
+
+{% block content %}
+<section class="appointment-section">
+  <div class="container">
+    <h1 class="section-title">Book Your Appointment</h1>
+    <p class="section-sub">Fill the form below and we'll confirm your appointment via SMS</p>
+    
+    <div class="appointment-form-container">
+      <form id="appointmentForm">
+        <input type="text" id="app_name" placeholder="Full Name" required>
+        <input type="tel" id="app_phone" placeholder="Phone Number" required>
+        <input type="date" id="app_date" required>
+        
+        <label style="font-weight: 600; margin-top: 10px; display: block;">Select Time Slot:</label>
+        <div class="time-slots">
+          <div class="time-slot" data-time="10:00 AM">10:00 AM</div>
+          <div class="time-slot" data-time="12:00 PM">12:00 PM</div>
+          <div class="time-slot" data-time="3:00 PM">3:00 PM</div>
+          <div class="time-slot" data-time="5:00 PM">5:00 PM</div>
+          <div class="time-slot" data-time="7:00 PM">7:00 PM</div>
+        </div>
+        
+        <div class="sunday-note">
+          <i class="fas fa-calendar-week"></i> 
+          <strong>Sunday Appointments:</strong> Available on prior request only.
+        </div>
+        
+        <input type="hidden" id="selected_time" value="10:00 AM">
+        <button type="submit" class="submit-btn">Confirm Appointment</button>
+      </form>
+      <div id="appMsg" style="margin-top:20px; text-align:center;"></div>
+    </div>
+    
+    <div class="info-box">
+      <h3><i class="fas fa-info-circle"></i> Appointment Information</h3>
+      <p>✓ Free consultation available</p>
+      <p>✓ SMS confirmation sent immediately</p>
+      <p>✓ Please arrive 10 minutes early</p>
+      <p>✓ Bring previous dental records if any</p>
+      <p class="sunday-highlight"> Sunday appointments available by prior request only</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .appointment-section {
+    padding: 80px 5%;
+    background: linear-gradient(135deg, #f0f9f6 0%, #ffffff 100%);
+  }
+  .container { max-width: 700px; margin: 0 auto; }
+  .appointment-form-container {
+    background: white;
+    padding: 40px;
+    border-radius: 32px;
+    box-shadow: 0 20px 30px rgba(0,0,0,0.08);
+    margin-bottom: 30px;
+  }
+  .time-slots {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin: 15px 0 20px;
+  }
+  .time-slot {
+    padding: 10px 20px;
+    border: 1px solid #e2e8f0;
+    border-radius: 50px;
+    background: white;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+  .time-slot:hover { border-color: #e9a23b; }
+  .time-slot.selected { background: #e9a23b; color: white; border-color: #e9a23b; }
+  .sunday-note {
+    background: #fef5e8;
+    padding: 12px 15px;
+    border-radius: 12px;
+    margin: 15px 0;
+    font-size: 0.85rem;
+    color: #b45309;
+    border-left: 4px solid #e9a23b;
+  }
+  .sunday-note a { color: #e9a23b; text-decoration: none; }
+  .sunday-note a:hover { text-decoration: underline; }
+  .submit-btn {
+    background: #e9a23b;
+    width: 100%;
+    padding: 14px;
+    border-radius: 50px;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 10px;
+  }
+  .submit-btn:hover { background: #d48a2b; }
+  input {
+    width: 100%;
+    padding: 14px 18px;
+    margin: 10px 0;
+    border: 1px solid #e2e8f0;
+    border-radius: 50px;
+    font-size: 0.95rem;
+  }
+  .info-box {
+    background: #1e6f5c;
+    color: white;
+    padding: 30px;
+    border-radius: 24px;
+    text-align: center;
+  }
+  .info-box h3 { margin-bottom: 20px; }
+  .info-box p { margin: 12px 0; }
+  .sunday-highlight {
+    background: rgba(255,255,255,0.2);
+    padding: 10px;
+    border-radius: 12px;
+    margin-top: 15px;
+  }
+  .toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #1e6f5c;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 50px;
+    z-index: 1200;
+  }
+</style>
+
+<script>
+  let selectedTime = "10:00 AM";
+  
+  document.querySelectorAll('.time-slot').forEach(slot => {
+    slot.addEventListener('click', function() {
+      document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
+      this.classList.add('selected');
+      selectedTime = this.getAttribute('data-time');
+      document.getElementById('selected_time').value = selectedTime;
+    });
+  });
+  
+  document.querySelector('.time-slot').classList.add('selected');
+
+  function showToast(msg, isError = false) {
+    let toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.style.backgroundColor = isError ? '#b91c1c' : '#1e6f5c';
+    toast.innerText = msg;
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 3000);
+  }
+
+  document.getElementById('appointmentForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const name = document.getElementById('app_name').value.trim();
+    const phone = document.getElementById('app_phone').value.trim();
+    const date = document.getElementById('app_date').value;
+    const timeSlot = document.getElementById('selected_time').value;
+    
+    if (!name || !phone || !date) {
+      showToast('Please fill all details', true);
+      return;
+    }
+    
+    if (phone.length < 10) {
+      showToast('Please enter a valid 10-digit phone number', true);
+      return;
+    }
+    
+    // Check if Sunday selected and show reminder
+    const selectedDate = new Date(date);
+    if (selectedDate.getDay() === 0) {
+      showToast('Sunday appointments are available by prior request only.', false);
+    }
+    
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('phone', phone);
+    formData.append('date', date);
+    formData.append('time_slot', timeSlot);
+    
+    try {
+      const response = await fetch('/book_appointment', { method: 'POST', body: formData });
+      const result = await response.json();
+      
+      if (result.success) {
+        showToast(result.message);
+        document.getElementById('app_name').value = '';
+        document.getElementById('app_phone').value = '';
+        document.getElementById('app_date').value = '';
+      } else {
+        showToast(result.message || 'Booking failed', true);
+      }
+    } catch (error) {
+      showToast('Network error. Please try again.', true);
+    }
+  });
+
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('app_date').min = today;
+</script>
+{% endblock %}

@@ -1,0 +1,498 @@
+{% extends "base.html" %}
+
+{% block title %}Patient Feedback & FAQs{% endblock %}
+
+{% block content %}
+<section class="feedback-section">
+  <div class="container">
+    <h1 class="section-title">Patient Feedback</h1>
+    <p class="section-sub">We value your opinion. Share your experience with us</p>
+    
+    <!-- Feedback Form -->
+    <div class="feedback-form-container">
+      <form id="feedbackForm">
+        <input type="text" id="fb_name" placeholder="Your Full Name" required>
+        <input type="tel" id="fb_phone" placeholder="Phone Number (optional)">
+        <textarea rows="4" id="fb_msg" placeholder="Share your experience with our dental clinic..." required></textarea>
+        <button type="submit" class="submit-btn">Submit Feedback</button>
+      </form>
+      <div id="fbMsg" style="margin-top: 15px; text-align: center;"></div>
+    </div>
+    
+    <!-- Display Feedbacks -->
+    <div class="feedback-list-container">
+      <h3>What Our Patients Say</h3>
+      <div id="feedbackList" class="feedback-list">
+        <div style="text-align: center; color: #666;">Loading feedback...</div>
+      </div>
+    </div>
+
+    <!-- ========== FREQUENTLY ASKED QUESTIONS SECTION ========== -->
+    <div class="faq-container">
+      <h3>Frequently Asked Questions</h3>
+      <div class="faq-grid">
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            How long do dental implants last?
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            Dental implants can last 20+ years or even a lifetime with proper care. Regular dental checkups, good oral hygiene, and avoiding hard foods help maintain them.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            Is root canal treatment painful?
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            No, modern root canal treatments are virtually painless. We use advanced local anesthesia and rotary endodontics to ensure your complete comfort throughout the procedure.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            Do you offer flexible payment options?
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            Yes, we offer EMI options and accept all major insurance plans. We also accept credit/debit cards, UPI, and cash payments. Contact us for payment plans.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            How often should I visit the dentist?
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            We recommend visiting the dentist every 6 months for routine checkups and professional cleaning. Regular visits help prevent dental problems and maintain oral health.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            What types of dental treatments do you offer?
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            We offer complete dental care including implants, RCT, braces & aligners, crowns & bridges, teeth whitening, extractions, pediatric dentistry, and smile makeovers.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            Do you treat children?
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            Yes, we specialize in pediatric dentistry. Our child-friendly environment and gentle approach make dental visits comfortable and positive for children.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            What is the cost of common dental procedures?
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            Costs vary depending on the procedure and complexity. We provide transparent estimates after consultation. Please call us for approximate pricing.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            Do you accept dental insurance?
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            Yes, we accept most major dental insurance plans. Our staff can help you verify coverage and submit claims on your behalf.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            How do I maintain my braces or aligners?
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            Brush twice daily, avoid hard/sticky foods, and attend regular follow-ups. We provide complete guidance and cleaning kits for braces and aligners.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            Is teeth whitening safe?
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">
+            Yes, professional teeth whitening under dental supervision is completely safe. We use enamel-safe whitening agents for optimal results without sensitivity.
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- ========== END FAQ SECTION ========== -->
+
+  </div>
+</section>
+
+<style>
+  .feedback-section {
+    padding: 80px 5%;
+    background: linear-gradient(135deg, #f0f9f6 0%, #ffffff 100%);
+  }
+  
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  
+  .section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #0f5242;
+    margin-bottom: 16px;
+  }
+  
+  .section-sub {
+    text-align: center;
+    color: #64748b;
+    margin-bottom: 56px;
+    font-size: 1.1rem;
+  }
+  
+  /* Feedback Form Styles */
+  .feedback-form-container {
+    background: white;
+    padding: 40px;
+    border-radius: 32px;
+    box-shadow: 0 20px 30px rgba(0,0,0,0.08);
+    margin-bottom: 40px;
+  }
+  
+  input, textarea {
+    width: 100%;
+    padding: 14px 18px;
+    margin: 12px 0;
+    border: 1px solid #e2e8f0;
+    border-radius: 50px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    transition: all 0.2s;
+  }
+  
+  textarea {
+    border-radius: 24px;
+    resize: vertical;
+  }
+  
+  input:focus, textarea:focus {
+    outline: none;
+    border-color: #e9a23b;
+    box-shadow: 0 0 0 3px rgba(233,162,59,0.1);
+  }
+  
+  .submit-btn {
+    background: #e9a23b;
+    width: 100%;
+    padding: 14px;
+    border-radius: 50px;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 8px;
+    transition: all 0.2s;
+  }
+  
+  .submit-btn:hover {
+    background: #d48a2b;
+    transform: translateY(-2px);
+  }
+  
+  /* Feedback List Styles */
+  .feedback-list-container {
+    background: white;
+    padding: 40px;
+    border-radius: 32px;
+    box-shadow: 0 20px 30px rgba(0,0,0,0.08);
+    margin-bottom: 40px;
+  }
+  
+  .feedback-list-container h3 {
+    color: #0f5242;
+    font-size: 1.5rem;
+    margin-bottom: 25px;
+    text-align: center;
+  }
+  
+  .feedback-list {
+    max-height: 400px;
+    overflow-y: auto;
+  }
+  
+  .feedback-item {
+    background: #f8fafc;
+    padding: 18px;
+    border-radius: 20px;
+    margin-bottom: 15px;
+    border-left: 4px solid #e9a23b;
+    transition: all 0.2s;
+  }
+  
+  .feedback-item:hover {
+    transform: translateX(5px);
+    background: #f1f5f9;
+  }
+  
+  .feedback-item strong {
+    color: #1e6f5c;
+    font-size: 1rem;
+    display: block;
+    margin-bottom: 8px;
+  }
+  
+  .feedback-item .message {
+    color: #4a5568;
+    line-height: 1.5;
+  }
+  
+  /* FAQ Styles */
+  .faq-container {
+    background: white;
+    padding: 40px;
+    border-radius: 32px;
+    box-shadow: 0 20px 30px rgba(0,0,0,0.08);
+  }
+  
+  .faq-container h3 {
+    color: #0f5242;
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+  
+  .faq-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .faq-item {
+    background: #f8fafc;
+    border-radius: 16px;
+    border: 1px solid #e2e8f0;
+    transition: all 0.3s ease;
+  }
+  
+  .faq-item:hover {
+    border-color: #e9a23b;
+  }
+  
+  .faq-question {
+    padding: 18px 22px;
+    font-weight: 700;
+    font-size: 1rem;
+    color: #1e293b;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    background: white;
+    transition: background 0.2s;
+    border-radius: 16px;
+  }
+  
+  .faq-question:hover {
+    background: #fef5e8;
+  }
+  
+  .faq-toggle {
+    color: #e9a23b;
+    font-size: 1.3rem;
+    font-weight: 600;
+  }
+  
+  .faq-answer {
+    padding: 0 22px 18px 22px;
+    display: none;
+    color: #64748b;
+    line-height: 1.6;
+    font-size: 0.95rem;
+    border-top: 1px solid #e2e8f0;
+    margin-top: 0;
+    background: #fefef8;
+    border-radius: 0 0 16px 16px;
+  }
+  
+  .faq-item.open .faq-answer {
+    display: block;
+  }
+  
+  .faq-item.open .faq-question {
+    background: #fef5e8;
+    border-radius: 16px 16px 0 0;
+  }
+  
+  .toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #1e6f5c;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 50px;
+    z-index: 1200;
+    animation: slideIn 0.3s ease;
+  }
+  
+  @keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
+  
+  @media (max-width: 800px) {
+    .section-title { font-size: 1.8rem; }
+    .feedback-form-container { padding: 25px; }
+    .feedback-list-container { padding: 25px; }
+    .faq-container { padding: 25px; }
+    .faq-container h3 { font-size: 1.4rem; }
+    .faq-question { font-size: 0.9rem; padding: 15px 18px; }
+    .faq-answer { font-size: 0.85rem; padding: 0 18px 15px 18px; }
+  }
+</style>
+
+<script>
+  // ==================== FAQ TOGGLE - FIXED ====================
+  document.addEventListener('DOMContentLoaded', function() {
+    const faqItems = document.querySelectorAll('.faq-item');
+    
+    faqItems.forEach(item => {
+      const questionDiv = item.querySelector('.faq-question');
+      
+      questionDiv.addEventListener('click', function() {
+        // Toggle the 'open' class on the parent .faq-item
+        item.classList.toggle('open');
+        
+        // Change the toggle icon from + to - when open
+        const toggleSpan = this.querySelector('.faq-toggle');
+        if (item.classList.contains('open')) {
+          toggleSpan.textContent = '−';
+        } else {
+          toggleSpan.textContent = '+';
+        }
+      });
+    });
+  });
+
+  // ==================== TOAST NOTIFICATION ====================
+  function showToast(msg, isError = false) {
+    let toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.style.backgroundColor = isError ? '#b91c1c' : '#1e6f5c';
+    toast.innerText = msg;
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 3000);
+  }
+
+  // ==================== ESCAPE HTML ====================
+  function escapeHtml(str) {
+    if (!str) return '';
+    return str.replace(/[&<>]/g, function(m) {
+      if (m === '&') return '&amp;';
+      if (m === '<') return '&lt;';
+      if (m === '>') return '&gt;';
+      return m;
+    });
+  }
+
+  // ==================== LOAD FEEDBACKS ====================
+  async function loadFeedbacks() {
+    try {
+      const response = await fetch('/get_feedbacks');
+      const data = await response.json();
+      renderFeedbacks(data);
+    } catch (error) {
+      console.error('Error loading feedbacks:', error);
+      document.getElementById('feedbackList').innerHTML = '<div style="text-align: center; color: #666;">Unable to load feedbacks. Please try again.</div>';
+    }
+  }
+
+  // ==================== RENDER FEEDBACKS ====================
+  function renderFeedbacks(feedbacks) {
+    const container = document.getElementById('feedbackList');
+    if (!container) return;
+    
+    if (!feedbacks || feedbacks.length === 0) {
+      container.innerHTML = '<div style="text-align: center; color: #666;">No feedback yet. Be the first to share!</div>';
+      return;
+    }
+    
+    let html = '';
+    feedbacks.slice().reverse().forEach(fb => {
+      html += `
+        <div class="feedback-item">
+          <strong>⭐ ${escapeHtml(fb.name)}</strong>
+          <div class="message">“${escapeHtml(fb.message)}”</div>
+        </div>
+      `;
+    });
+    container.innerHTML = html;
+  }
+
+  // ==================== SUBMIT FEEDBACK ====================
+  const feedbackForm = document.getElementById('feedbackForm');
+  if (feedbackForm) {
+    feedbackForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const name = document.getElementById('fb_name').value.trim();
+      const msg = document.getElementById('fb_msg').value.trim();
+      const phone = document.getElementById('fb_phone').value.trim();
+      
+      if (!name || !msg) {
+        showToast('Please enter your name and feedback', true);
+        return;
+      }
+      
+      const submitBtn = feedbackForm.querySelector('.submit-btn');
+      const originalText = submitBtn.textContent;
+      submitBtn.textContent = 'Submitting...';
+      submitBtn.disabled = true;
+      
+      const formData = new FormData();
+      formData.append('name', name);
+      formData.append('message', msg);
+      formData.append('phone', phone);
+      
+      try {
+        const response = await fetch('/submit_feedback', { method: 'POST', body: formData });
+        const result = await response.json();
+        
+        if (result.success) {
+          showToast(result.message);
+          document.getElementById('fb_name').value = '';
+          document.getElementById('fb_msg').value = '';
+          document.getElementById('fb_phone').value = '';
+          await loadFeedbacks();
+        } else {
+          showToast(result.message || 'Submission failed', true);
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        showToast('Network error. Please try again.', true);
+      } finally {
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+      }
+    });
+  }
+
+  // ==================== LOAD ON PAGE START ====================
+  loadFeedbacks();
+</script>
+{% endblock %}

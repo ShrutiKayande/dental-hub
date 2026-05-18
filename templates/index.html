@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Advanced Dental Care{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <div class="hero-left">
+    <h1>Advanced Dental Care<br>With a Gentle Touch</h1>
+    <p>At Dr. Yogesh Nagargoje's Dental Hub, we combine advanced technology with compassionate care to deliver exceptional dental treatments. Our multispeciality team ensures painless procedures using state-of-the-art equipment. From routine checkups to complex full-mouth rehabilitation and dental implants, we provide complete care under one roof.</p>
+  </div>
+  <div class="hero-right">
+    <img src="{{ url_for('static', filename='Screenshot 2026-05-11 220705.png') }}" alt="Dental Office">
+  </div>
+</section>
+
+<section class="why-choose-section">
+  <div class="why-container">
+    <div class="why-text">
+      <h2>Why Dr. Yogesh Nagargoje's Dental Hub?</h2>
+      <ul class="why-list">
+        <li><i class="fas fa-star-of-life"></i> <strong>Advanced Dentistry</strong> – Digital smile design, full mouth rehab</li>
+        <li><i class="fas fa-microscope"></i> <strong>German Technology</strong> – CBCT, microscopes</li>
+        <li><i class="fas fa-shield-virus"></i> <strong>Strict Sterilisation</strong> – International protocols</li>
+        <li><i class="fas fa-hand-holding-heart"></i> <strong>Painless & Empathetic</strong> – Anxiety-free</li>
+        <li><i class="fas fa-clock"></i> <strong>Flexible Hours</strong> – Mon-Sat 9AM-10PM</li>
+      </ul>
+    </div>
+    <div class="why-image">
+      <img src="{{ url_for('static', filename='Screenshot 2026-05-11 220705.png') }}" alt="Dental Clinic">
+    </div>
+  </div>
+</section>
+{% endblock %}

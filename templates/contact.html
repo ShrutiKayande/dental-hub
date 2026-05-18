@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block title %}Contact Us{% endblock %}
+
+{% block content %}
+<section class="contact-section">
+  <div class="container">
+    <h1 class="section-title">Contact Us</h1>
+    <p class="section-sub">Get in touch with us for any queries or appointments</p>
+    
+    <div class="contact-grid">
+      <div class="contact-info">
+        <div class="info-card">
+          <i class="fas fa-map-marker-alt"></i>
+          <h3>Address</h3>
+          <p>Parth Hotel Complex, Opposite To Sayyed Petroleum (HPCL), Near New Renapur, Below Parth Hotel, Ambajogai Road, Ganj Golai, Latur-413512, Maharashtra</p>
+        </div>
+        
+        <div class="info-card">
+          <i class="fas fa-phone-alt"></i>
+          <h3>Phone</h3>
+          <p><a href="tel:+919405363270">+91 94053 63270</a></p>
+          <p><a href="https://wa.me/919405363270">WhatsApp: +91 94053 63270</a></p>
+        </div>
+        
+        <div class="info-card">
+          <i class="fas fa-clock"></i>
+          <h3>Working Hours</h3>
+          <p>Monday - Saturday: 9:00 AM - 10:00 PM</p>
+          <p>Sunday: appointments available by prior request only</p>
+        </div>
+      </div>
+      
+      <div class="contact-map">
+        <h3>Find Us Here</h3>
+        <iframe 
+          src="https://maps.google.com/maps?q=Parth+Hotel+Complex+Ambajogai+Road+Latur&t=&z=15&ie=UTF8&iwloc=&output=embed"
+          width="100%" 
+          height="350" 
+          style="border:0; border-radius: 24px;" 
+          allowfullscreen="">
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact-section {
+    padding: 80px 5%;
+    background: linear-gradient(135deg, #f0f9f6 0%, #ffffff 100%);
+  }
+  .container { max-width: 1200px; margin: 0 auto; }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+  .info-card {
+    background: white;
+    padding: 30px;
+    border-radius: 24px;
+    margin-bottom: 25px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  }
+  .info-card i {
+    font-size: 2rem;
+    color: #e9a23b;
+    margin-bottom: 15px;
+  }
+  .info-card h3 {
+    color: #1e6f5c;
+    margin-bottom: 15px;
+  }
+  .info-card p, .info-card a {
+    color: #4a5568;
+    text-decoration: none;
+    line-height: 1.6;
+  }
+  .info-card a:hover { color: #e9a23b; }
+  .contact-map {
+    background: white;
+    padding: 30px;
+    border-radius: 24px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  }
+  .contact-map h3 {
+    color: #1e6f5c;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  @media (max-width: 800px) {
+    .contact-grid { grid-template-columns: 1fr; }
+  }
+</style>
+{% endblock %}

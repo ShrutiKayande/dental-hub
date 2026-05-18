@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Our Doctors{% endblock %}
+
+{% block content %}
+<section class="doctors-section">
+  <div class="container" style="max-width: 1200px; margin: 0 auto;">
+    <h1 class="section-title">Meet Our Experts</h1>
+    <p class="section-sub">Experienced specialists dedicated to your smile</p>
+    
+    <div class="doctors-grid">
+      <!-- Male Doctor -->
+      <div class="doctor-card">
+        <div class="doctor-img" style="background-image: url('{{ url_for('static', filename='jiju.jpeg') }}');"></div>
+        <h3>Dr. Yogesh Nagargoje</h3>
+        <div class="doctor-degree">BDS, MDS (Prosthodontics), PHD</div>
+        <div class="doctor-specialty">Prosthodontist & Implantologist</div>
+        <p>With over 12 years of clinical experience, Dr. Yogesh Nagargoje is a renowned Prosthodontist and Implantologist. He has successfully placed over 3000+ dental implants and performed countless full-mouth rehabilitation procedures.</p>
+        <div class="doctor-stats">
+          <div><span class="stat-number">12+</span><br>Years</div>
+          <div><span class="stat-number">3000+</span><br>Implants</div>
+          <div><span class="stat-number">5000+</span><br>Patients</div>
+        </div>
+      </div>
+      
+      <!-- Female Doctor -->
+      <div class="doctor-card">
+        <div class="doctor-img" style="background-image: url('{{ url_for('static', filename='shreya.jpeg') }}');"></div>
+        <h3>Dr. Shreya Nagargoje</h3>
+        <div class="doctor-degree">BDS, MDS (Endodontist)</div>
+        <div class="doctor-specialty">Endodontist & Root Canal Specialist</div>
+        <p>Dr. Shreya Nagargoje is a skilled Endodontist with 8+ years of specialized experience in painless root canal treatments and microscopic endodontics. She has successfully performed over 2000+ root canal procedures.</p>
+        <div class="doctor-stats">
+          <div><span class="stat-number">8+</span><br>Years</div>
+          <div><span class="stat-number">2000+</span><br>RCTs</div>
+          <div><span class="stat-number">98%</span><br>Success</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

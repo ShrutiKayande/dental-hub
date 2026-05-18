@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Dr. Yogesh Nagargoje's Dental Hub | {% block title %}Home{% endblock %}</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #ffffff;
+      color: #1a2c3e;
+      scroll-behavior: smooth;
+      line-height: 1.5;
+    }
+
+    :root {
+      --primary: #1e6f5c;
+      --primary-dark: #0f5242;
+      --accent: #e9a23b;
+      --accent-dark: #d48a2b;
+      --gray-light: #f8fafc;
+      --gray-border: #e2e8f0;
+      --text-muted: #64748b;
+      --white: #ffffff;
+      --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Top Bar */
+    .top-bar {
+      background: var(--primary-dark);
+      color: var(--white);
+      text-align: center;
+      padding: 12px 20px;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+    .top-bar i { margin-right: 8px; color: var(--accent); }
+    .top-bar a { color: #ffecb3; text-decoration: none; font-weight: 600; }
+
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 5%;
+      background: var(--white);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      flex-wrap: wrap;
+    }
+    .logo h2 {
+      font-size: 1.3rem;
+      color: var(--primary);
+      font-weight: 800;
+    }
+    .logo p {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    }
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 600;
+      color: #1e293b;
+      transition: 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--accent);
+    }
+    .mobile-menu {
+      display: none;
+      font-size: 1.6rem;
+      cursor: pointer;
+    }
+
+    /* Hero Section */
+    .hero {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      padding: 60px 5%;
+      gap: 50px;
+      background: linear-gradient(135deg, #f0f9f6 0%, #ffffff 100%);
+    }
+    .hero-left { flex: 1; }
+    .hero-left h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin-bottom: 20px;
+    }
+    .btn-primary {
+      background: var(--accent);
+      border: none;
+      padding: 14px 34px;
+      border-radius: 50px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-block;
+      text-decoration: none;
+      color: #1e293b;
+    }
+    .btn-primary:hover {
+      background: var(--accent-dark);
+      transform: translateY(-2px);
+    }
+    .hero-right { flex: 1; text-align: center; }
+    .hero-right img {
+      width: 100%;
+      max-width: 500px;
+      border-radius: 28px;
+      box-shadow: var(--shadow-lg);
+    }
+
+    /* Services Section */
+    .services-section {
+      padding: 70px 5%;
+      background: white;
+    }
+    .section-title {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin-bottom: 12px;
+    }
+    .section-sub {
+      text-align: center;
+      color: var(--text-muted);
+      margin-bottom: 56px;
+    }
+    .services-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 32px;
+    }
+    .service-card {
+      background: var(--white);
+      border-radius: 28px;
+      width: 280px;
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--gray-border);
+      transition: 0.3s;
+    }
+    .service-card:hover { transform: translateY(-8px); }
+    .service-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .service-content {
+      padding: 24px 20px;
+      text-align: center;
+    }
+    .service-content i {
+      font-size: 2.2rem;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .service-content h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    /* Why Choose Us */
+    .why-choose-section {
+      padding: 70px 5%;
+      background: var(--gray-light);
+    }
+    .why-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 60px;
+      align-items: center;
+    }
+    .why-text { flex: 1; }
+    .why-text h2 {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin-bottom: 24px;
+    }
+    .why-list {
+      list-style: none;
+    }
+    .why-list li {
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .why-list i {
+      color: var(--accent);
+      font-size: 1.3rem;
+      width: 28px;
+    }
+    .why-image {
+      flex: 1;
+      text-align: center;
+    }
+    .why-image img {
+      width: 100%;
+      max-width: 500px;
+      border-radius: 28px;
+      box-shadow: var(--shadow-lg);
+      object-fit: cover;
+    }
+
+    /* Doctors Section */
+    .doctors-section {
+      padding: 70px 5%;
+      background: white;
+    }
+    .doctors-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 45px;
+      justify-content: center;
+      margin-top: 40px;
+    }
+    .doctor-card {
+      background: var(--white);
+      border-radius: 32px;
+      padding: 32px 28px;
+      text-align: center;
+      width: 340px;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--gray-border);
+      transition: transform 0.3s ease;
+    }
+    .doctor-card:hover { transform: translateY(-8px); }
+    .doctor-img {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      margin: 0 auto 20px;
+      background-size: cover;
+      background-position: center;
+      border: 4px solid var(--accent);
+    }
+    .doctor-card h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+    }
+    .doctor-degree {
+      color: var(--accent);
+      font-weight: 600;
+      margin: 8px 0;
+    }
+    .doctor-specialty {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+    .doctor-stats {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 18px;
+      padding-top: 15px;
+      border-top: 1px solid var(--gray-border);
+    }
+    .stat-number {
+      font-weight: 800;
+      font-size: 1.3rem;
+      color: var(--primary);
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      padding: 70px 5%;
+      background: var(--gray-light);
+    }
+    .faq-grid {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .faq-item {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 20px 26px;
+      cursor: pointer;
+      border-left: 5px solid var(--accent);
+    }
+    .faq-question {
+      font-weight: 700;
+      display: flex;
+      justify-content: space-between;
+    }
+    .faq-answer {
+      margin-top: 14px;
+      color: var(--text-muted);
+      display: none;
+    }
+
+    /* Forms */
+    .form-section {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      padding: 70px 5%;
+      background: linear-gradient(120deg, #ffffff, #f5faf8);
+    }
+    .form-box {
+      flex: 1;
+      background: var(--white);
+      padding: 36px;
+      border-radius: 32px;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--gray-border);
+    }
+    .form-box h3 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin-bottom: 24px;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 14px 18px;
+      margin: 12px 0;
+      border: 1px solid var(--gray-border);
+      border-radius: 50px;
+      font-size: 0.95rem;
+    }
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+    textarea {
+      border-radius: 24px;
+      resize: vertical;
+    }
+    .submit-btn {
+      background: var(--accent);
+      width: 100%;
+      padding: 14px;
+      border-radius: 50px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      margin-top: 8px;
+    }
+    .submit-btn:hover {
+      background: var(--accent-dark);
+    }
+    .time-slots {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin: 15px 0;
+    }
+    .time-slot {
+      padding: 8px 16px;
+      border: 1px solid var(--gray-border);
+      border-radius: 50px;
+      background: var(--white);
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: 0.2s;
+    }
+    .time-slot:hover {
+      border-color: var(--accent);
+    }
+    .time-slot.selected {
+      background: var(--accent);
+      color: white;
+      border-color: var(--accent);
+    }
+    .feedback-list {
+      max-height: 400px;
+      overflow-y: auto;
+      margin-top: 24px;
+    }
+    .feedback-item {
+      background: var(--gray-light);
+      padding: 14px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+    }
+
+    /* Footer */
+    footer {
+      background: #0a2f31;
+      color: #e2e8f0;
+      padding: 60px 5% 30px;
+    }
+    .footer-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 40px;
+    }
+    .footer-col h4 {
+      margin-bottom: 18px;
+      color: var(--accent);
+    }
+    .footer-col p, .footer-col a {
+      color: #cfdfdd;
+      text-decoration: none;
+      margin: 10px 0;
+    }
+    .copyright {
+      text-align: center;
+      margin-top: 50px;
+      padding-top: 25px;
+      border-top: 1px solid #2c6e6b;
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--primary);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 50px;
+      z-index: 1200;
+      animation: slideIn 0.3s ease;
+    }
+    @keyframes slideIn {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    /* ========== MOBILE RESPONSIVE FIXES ========== */
+    @media (max-width: 768px) {
+      /* General */
+      body {
+        font-size: 14px;
+      }
+      
+      .section-title {
+        font-size: 1.6rem;
+      }
+      
+      .section-sub {
+        font-size: 0.9rem;
+        margin-bottom: 30px;
+      }
+
+      /* Navigation */
+      .nav-links {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        background: white;
+        padding: 20px;
+        text-align: center;
+        gap: 15px;
+      }
+      .nav-links.show {
+        display: flex;
+      }
+      .mobile-menu {
+        display: block;
+      }
+
+      /* Hero Section */
+      .hero {
+        flex-direction: column;
+        text-align: center;
+        padding: 40px 20px;
+        gap: 30px;
+      }
+      .hero-left h1 {
+        font-size: 1.8rem;
+      }
+      .hero-left p {
+        font-size: 0.95rem;
+        padding: 0 10px;
+      }
+      .hero-right img {
+        width: 100%;
+        max-width: 280px;
+        height: auto;
+      }
+      .btn-primary {
+        padding: 12px 28px;
+        font-size: 0.9rem;
+      }
+
+      /* Services Grid */
+      .services-grid {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+      }
+      .service-card {
+        width: 90%;
+        max-width: 300px;
+      }
+      .service-img {
+        height: 160px;
+      }
+      .service-content {
+        padding: 18px 15px;
+      }
+      .service-content h3 {
+        font-size: 1.1rem;
+      }
+
+      /* Why Choose Us */
+      .why-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 30px;
+      }
+      .why-text h2 {
+        font-size: 1.6rem;
+        text-align: center;
+      }
+      .why-list li {
+        justify-content: center;
+        flex-wrap: wrap;
+        text-align: center;
+      }
+      .why-image img {
+        width: 100%;
+        max-width: 280px;
+        height: auto;
+      }
+
+      /* Doctors Section */
+      .doctors-grid {
+        flex-direction: column;
+        align-items: center;
+        gap: 25px;
+      }
+      .doctor-card {
+        width: 90%;
+        max-width: 320px;
+        padding: 25px 20px;
+      }
+      .doctor-img {
+        width: 130px;
+        height: 130px;
+      }
+      .doctor-card h3 {
+        font-size: 1.3rem;
+      }
+      .doctor-stats {
+        flex-wrap: wrap;
+        gap: 15px;
+      }
+      .stat-number {
+        font-size: 1.1rem;
+      }
+
+      /* FAQ Section */
+      .faq-item {
+        padding: 15px 18px;
+      }
+      .faq-question {
+        font-size: 0.9rem;
+      }
+      .faq-answer {
+        font-size: 0.85rem;
+      }
+
+      /* Forms */
+      .form-section {
+        flex-direction: column;
+        padding: 40px 20px;
+        gap: 25px;
+      }
+      .form-box {
+        width: 100%;
+        padding: 25px 20px;
+      }
+      .form-box h3 {
+        font-size: 1.3rem;
+        text-align: center;
+      }
+      input, textarea, .submit-btn {
+        padding: 12px 15px;
+        font-size: 0.9rem;
+      }
+      .time-slots {
+        justify-content: center;
+      }
+      .time-slot {
+        padding: 6px 12px;
+        font-size: 0.75rem;
+      }
+
+      /* Feedback List */
+      .feedback-item {
+        padding: 12px;
+      }
+      .feedback-item strong {
+        font-size: 0.9rem;
+      }
+
+      /* Contact Page */
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      .info-card {
+        padding: 20px;
+      }
+      .contact-map iframe {
+        height: 250px;
+      }
+
+      /* Footer */
+      .footer-grid {
+        flex-direction: column;
+        text-align: center;
+        gap: 25px;
+      }
+      .footer-col h4 {
+        font-size: 1rem;
+      }
+      .footer-col p, .footer-col a {
+        font-size: 0.85rem;
+      }
+      .copyright {
+        font-size: 0.75rem;
+      }
+
+      /* Admin Dashboard (if needed) */
+      .stats {
+        flex-direction: column;
+        gap: 10px;
+      }
+      .stat-box {
+        padding: 12px;
+      }
+      .stat-number {
+        font-size: 1.5rem;
+      }
+      table {
+        font-size: 0.8rem;
+      }
+      th, td {
+        padding: 6px;
+      }
+    }
+
+    /* Extra small devices (phones under 480px) */
+    @media (max-width: 480px) {
+      .hero-left h1 {
+        font-size: 1.5rem;
+      }
+      .section-title {
+        font-size: 1.4rem;
+      }
+      .service-card {
+        width: 95%;
+      }
+      .doctor-card {
+        width: 95%;
+      }
+      .time-slot {
+        padding: 5px 10px;
+        font-size: 0.7rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="top-bar">
+  <i class="fas fa-phone-alt"></i> Emergency: +91 94053 63270 &nbsp;|&nbsp;
+  <i class="fas fa-clock"></i> Open Mon-Sat: 9AM – 10PM | Walk-ins welcome
+</div>
+
+<nav class="navbar">
+  <div class="logo">
+    <h2>🦷 Dr. Yogesh Nagargoje's Dental Hub</h2>
+    <p>MULTISPECIALITY DENTAL CLINIC & IMPLANT CENTRE</p>
+  </div>
+  <div class="mobile-menu" id="mobileMenuBtn"><i class="fas fa-bars"></i></div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="{{ url_for('home') }}" {% if request.endpoint == 'home' %}class="active"{% endif %}>Home</a></li>
+    <li><a href="{{ url_for('about') }}" {% if request.endpoint == 'about' %}class="active"{% endif %}>About</a></li>
+    <li><a href="{{ url_for('services') }}" {% if request.endpoint == 'services' %}class="active"{% endif %}>Services</a></li>
+    <li><a href="{{ url_for('doctors') }}" {% if request.endpoint == 'doctors' %}class="active"{% endif %}>Doctors</a></li>
+    <li><a href="{{ url_for('appointment_page') }}" {% if request.endpoint == 'appointment_page' %}class="active"{% endif %}>Appointment</a></li>
+    <li><a href="{{ url_for('contact') }}" {% if request.endpoint == 'contact' %}class="active"{% endif %}>Contact</a></li>
+    <li><a href="{{ url_for('feedback_page') }}" {% if request.endpoint == 'feedback_page' %}class="active"{% endif %}>Feedback</a></li>
+  </ul>
+</nav>
+
+<main>
+  {% block content %}{% endblock %}
+</main>
+
+<footer id="contact">
+  <div class="footer-grid">
+    <div class="footer-col">
+      <h4>Dr. Yogesh Nagargoje's Dental Hub</h4>
+      <p>Multispeciality Dental Clinic & Implant Centre</p>
+      <p><i class="fas fa-map-marker-alt"></i> Parth Hotel Complex, Opposite To Sayyed Petroleum (HPCL), Near New Renapur, Below Parth Hotel, Ambajogai Road, Ganj Golai, Latur-413512, Maharashtra</p>
+    </div>
+    <div class="footer-col">
+      <h4>Contact Us</h4>
+      <p><i class="fas fa-phone-alt"></i> +91 94053 63270</p>
+      <p><i class="fab fa-whatsapp"></i> +91 94053 63270 (WhatsApp)</p>
+    </div>
+  </div>
+  <div class="copyright">
+    © 2026 Dr. Yogesh Nagargoje's Dental Hub — Excellence in Multispeciality Dentistry
+  </div>
+</footer>
+
+<script>
+  // Mobile menu toggle
+  const mobileBtn = document.getElementById('mobileMenuBtn');
+  const navLinks = document.getElementById('navLinks');
+  if (mobileBtn) {
+    mobileBtn.addEventListener('click', () => {
+      navLinks.classList.toggle('show');
+    });
+  }
+
+  // Close mobile menu when clicking a link
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('show');
+    });
+  });
+</script>
+</body>
+</html>
